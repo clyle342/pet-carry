@@ -4,35 +4,18 @@
     "slug": "uber",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/splash.png",
     "scheme": "uberclone",
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": [
       "**/*"
     ],
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#2F80ED"
-    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yourname.uber",
-      "splash": {
-        "image": "./assets/images/signup-car.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#2F80ED"
-      }
+      "bundleIdentifier": "com.yourname.uber"
     },
     "android": {
       "package": "com.yourname.uber",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#2F80ED"
-      },
-      "splash": {
-        "image": "./assets/images/signup-car.png",
-        "resizeMode": "contain",
         "backgroundColor": "#2F80ED"
       }
     },
