@@ -4,10 +4,10 @@ import { images, icons } from "../constants";
 import InputField from "@/components/InputField";
 import { useState } from "react";
 import CustomButton from "@/components/CustomButton";
-import OAuth from "@/components/OAuth";
+// import OAuth from "@/components/OAuth"; // 🔒 Temporarily disabled until API issue is fixed
 import { useSignUp } from "@clerk/clerk-expo";
 import ReactNativeModal from "react-native-modal";
-import { fetchAPI } from "@/lib/fetch";
+// import { fetchAPI } from "@/lib/fetch"; // 🔒 Temporarily disabled Neon serverless backend call
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -25,7 +25,7 @@ const SignUp = () => {
     code: "",
   });
 
-  // Sign up button pressed
+  // --- Handle Sign Up ---
   const onSignUpPress = async () => {
     if (!isLoaded) return;
 
@@ -38,11 +38,11 @@ const SignUp = () => {
       setVerification({ ...verification, state: "pending" });
     } catch (err: any) {
       console.log(JSON.stringify(err, null, 2));
-      Alert.alert("Error", err.errors[0]?.longMessage || "Sign up failed");
+      Alert.alert("Error", err.errors?.[0]?.longMessage || "Sign up failed");
     }
   };
 
-  // Verify email code
+  // --- Verify Email Code ---
   const onPressVerify = async () => {
     if (!isLoaded) return;
 
@@ -52,7 +52,8 @@ const SignUp = () => {
       });
 
       if (completeSignUp.status === "complete") {
-        // Create user in backend
+        // 🔒 Temporarily disabled Neon API (backend user creation)
+        /*
         await fetchAPI("/(api)/user", {
           method: "POST",
           body: JSON.stringify({
@@ -61,7 +62,9 @@ const SignUp = () => {
             clerkId: completeSignUp.createdUserId,
           }),
         });
+        */
 
+        // Clerk session activation still works fine
         await setActive({ session: completeSignUp.createdSessionId });
 
         // Set verification state to success
@@ -85,6 +88,7 @@ const SignUp = () => {
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
+        {/* Header Image */}
         <View className="relative w-full h-[250px]">
           <Image source={images.signUpCar} className="z-0 w-full h-[250px]" />
           <Text className="text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5">
@@ -92,6 +96,7 @@ const SignUp = () => {
           </Text>
         </View>
 
+        {/* Form Fields */}
         <View className="p-5">
           <InputField
             label="Name"
@@ -122,7 +127,10 @@ const SignUp = () => {
             className="mt-6"
           />
 
+          {/* 🔒 Temporarily disabled OAuth login options until API issue resolved */}
+          {/*
           <OAuth />
+          */}
 
           <Link
             href="/sign-in"
