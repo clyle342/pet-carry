@@ -20,11 +20,11 @@ Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstra
 
 ## 🐛 Bugs
 
-- **Splash Screen Not Working**  
-  The splash screen may not display correctly on some devices or emulators. This is currently under investigation.
+- **Splash Screen Issues**  
+  The splash screen may not render correctly on certain devices or emulators. This is currently being investigated.
 
-- **API Parse Error**  
-  Every API has trouble Pushing and Getting information due to a back in the environment or server configuration it results in data being parsed incorrectly. 
+- **API Parsing Errors**  
+  Some API calls may fail due to misconfiguration in the environment or server settings (I believe), resulting in data parsing errors. Placeholder data is currently used, but the underlying functionality is implemented and requires final testing after configuration adjustments.
 
 ---
 
