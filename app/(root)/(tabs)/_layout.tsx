@@ -66,7 +66,7 @@ const Layout = () => (
     <Tabs.Screen
       name="rides"
       options={{
-        title: "Ride",
+        title: "Trips",
         headerShown: false,
         tabBarIcon: ({ focused }) => (
           <View style={{ top: 4 }}>

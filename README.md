@@ -1,8 +1,8 @@
-# 🚕 Full Stack Uber Clone
+# 🐾 Pet Carry — Full Stack Trip Booking App
 
 ![Project Status](https://img.shields.io/badge/status-in%20progress-yellow) Two errors need amending and then initial development will finalise. 
 
-This project is a comprehensive **Uber Clone** mobile app built during the [JavaScript Mastery](https://jsmastery.pro/) course. It uses the latest features of **React Native**, **Expo**, **TypeScript**, and a lightning-fast **edge-ready Postgres database (NeonDB)**.
+This project is a comprehensive **Pet Carry** mobile app built during the [JavaScript Mastery](https://jsmastery.pro/) course. It uses the latest features of **React Native**, **Expo**, **TypeScript**, and a lightning-fast **edge-ready Postgres database (NeonDB)**.
 
 Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstrates how to architect a **scalable**, **responsive**, and **production-grade** application with advanced features like authentication, geolocation, payments, and state management.
 
@@ -48,14 +48,14 @@ Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstra
 👉 **Email & Password Authentication with Verification**  
 👉 **OAuth Using Google**   
 👉 **Home Screen with Live Location & Google Map**  
-👉 **Recent Rides Overview**  
-👉 **Find Rides by Location**  
-👉 **Select Rides from Nearby Cars on Map**  
-👉 **Confirm Ride with Time and Price Details**  
-👉 **Pay for Ride Using Stripe**  
-👉 **Ride Created After Successful Payment**  
+👉 **Recent Trips Overview**  
+👉 **Find Trips by Location**  
+👉 **Select Trips from Nearby Cars on Map**  
+👉 **Confirm Trip with Time and Price Details**  
+👉 **Pay for Trip Using Stripe**  
+👉 **Trip Created After Successful Payment**  
 👉 **User Profile Management**  
-👉 **View Ride History**
+👉 **View Trip History**
 
 ---
 
@@ -82,7 +82,7 @@ Create a .env file in the root of your project and add:
 - EXPO_PUBLIC_PLACES_API_KEY=
 - EXPO_PUBLIC_DIRECTIONS_API_KEY=
 - DATABASE_URL=
-- EXPO_PUBLIC_SERVER_URL=https://uber.dev/
+- EXPO_PUBLIC_SERVER_URL=https://petcarry.dev/
 - EXPO_PUBLIC_GEOAPIFY_API_KEY=
 - EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 - STRIPE_SECRET_KEY=
@@ -95,9 +95,9 @@ Create a .env file in the root of your project and add:
 
 ## 📺 Course Link
 
-This project was built using the [JavaScript Mastery Uber Clone Course](https://jsm.dev/uber-kit).  
+This project was built using the [JavaScript Mastery Trip Booking Course](https://jsm.dev/uber-kit).  
 Watch the full tutorial on YouTube:  
-🔗 [Build a Full Stack Uber Clone App (YouTube)](https://www.youtube.com/watch?v=1xHqHNX6B6I)
+🔗 [Build a Full Stack Trip Booking App (YouTube)](https://www.youtube.com/watch?v=1xHqHNX6B6I)
 
 ---
 

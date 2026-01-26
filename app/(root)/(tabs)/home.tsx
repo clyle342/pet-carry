@@ -225,7 +225,7 @@ export default function Home() {
                   style={{ width: 160, height: 160 }}
                   resizeMode="contain"
                 />
-                <Text className="text-sm mt-2">No recent rides found</Text>
+                <Text className="text-sm mt-2">No recent trips found</Text>
               </>
             ) : (
               <ActivityIndicator size="small" color="#000" />
@@ -262,9 +262,9 @@ export default function Home() {
               <Map />
             </View>
 
-            {/* Recent rides heading */}
+            {/* Recent trips heading */}
             <Text className="text-xl font-JakartaBold mt-5 mb-3">
-              Recent Rides
+              Recent Trips
             </Text>
           </>
         }

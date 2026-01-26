@@ -175,10 +175,10 @@ const Rides = () => {
         ListHeaderComponent={
           <View className="mt-5 mb-3">
             <Text className="text-2xl font-JakartaExtraBold">
-              Your Ride History
+              Your Trip History
             </Text>
             <Text className="text-base text-gray-600 mt-1">
-              View your recent rides and trip details
+              View your recent trips and trip details
             </Text>
           </View>
         }
@@ -198,7 +198,7 @@ const Rides = () => {
                   resizeMode="contain"
                 />
                 <Text className="text-sm mt-2 text-gray-500">
-                  No recent rides found
+                  No recent trips found
                 </Text>
               </>
             )}
