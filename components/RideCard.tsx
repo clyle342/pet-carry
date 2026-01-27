@@ -5,14 +5,6 @@ import { formatDate, formatTime } from "@/lib/utils";
 import { Ride } from "@/types/type";
 
 const RideCard = ({ ride }: { ride: Ride }) => {
-  const normalizedStatus = String(ride.payment_status).toUpperCase();
-  const statusColor =
-    normalizedStatus === "SUCCESS"
-      ? "#3B82F6"
-      : normalizedStatus === "PENDING"
-        ? "#F59E0B"
-        : "#EF4444";
-
   return (
     <View className="flex flex-row items-center justify-center bg-white rounded-lg shadow-sm shadow-neutral-300 mb-3">
       <View className="flex flex-col items-start justify-center p-3">
@@ -75,11 +67,13 @@ const RideCard = ({ ride }: { ride: Ride }) => {
             </Text>
             <Text
               style={{
-                color: statusColor,
+                color: ride.payment_status === "paid" ? "#3B82F6" : undefined,
               }}
-              className="text-md capitalize font-JakartaBold"
+              className={`text-md capitalize font-JakartaBold ${
+                ride.payment_status !== "paid" ? "text-red-500" : ""
+              }`}
             >
-              {normalizedStatus}
+              {ride.payment_status}
             </Text>
           </View>
         </View>
