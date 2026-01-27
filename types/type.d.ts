@@ -33,22 +33,18 @@ declare interface MapProps {
   onMapReady?: () => void;
 }
 
-declare type PaymentStatus = "PENDING" | "SUCCESS" | "FAILED";
-
 declare interface Ride {
-  ride_id: number | string;
   origin_address: string;
   destination_address: string;
-  origin_latitude: number | string;
-  origin_longitude: number | string;
-  destination_latitude: number | string;
-  destination_longitude: number | string;
+  origin_latitude: number;
+  origin_longitude: number;
+  destination_latitude: number;
+  destination_longitude: number;
   ride_time: number;
-  fare_price: number | string;
-  payment_status: PaymentStatus | string;
-  driver_id: number | string;
-  user_id?: string;
-  user_email?: string;
+  fare_price: number;
+  payment_status: string;
+  driver_id: number;
+  user_email: string;
   created_at: string;
   driver: {
     first_name: string;
@@ -94,12 +90,11 @@ declare interface InputFieldProps extends TextInputProps {
 }
 
 declare interface PaymentProps {
-  fullName?: string;
-  email?: string;
-  amount?: number;
-  driverId?: number;
-  rideTime?: number;
-  userId?: string;
+  fullName: string;
+  email: string;
+  amount: string;
+  driverId: number;
+  rideTime: number;
 }
 
 declare interface LocationStore {
