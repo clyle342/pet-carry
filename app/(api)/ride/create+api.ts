@@ -1,5 +1,7 @@
 import { neon } from "@neondatabase/serverless";
 
+const VALID_STATUSES = new Set(["PENDING", "SUCCESS", "FAILED"]);
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -36,20 +38,29 @@ export async function POST(request: Request) {
       );
     }
 
+    const normalizedStatus = String(payment_status).toUpperCase();
+
+    if (!VALID_STATUSES.has(normalizedStatus)) {
+      return Response.json(
+        { error: "Invalid payment status" },
+        { status: 400 }
+      );
+    }
+
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     const response = await sql`
-      INSERT INTO rides ( 
-          origin_address, 
-          destination_address, 
-          origin_latitude, 
-          origin_longitude, 
-          destination_latitude, 
-          destination_longitude, 
-          ride_time, 
-          fare_price, 
-          payment_status, 
-          driver_id, 
+      INSERT INTO rides (
+          origin_address,
+          destination_address,
+          origin_latitude,
+          origin_longitude,
+          destination_latitude,
+          destination_longitude,
+          ride_time,
+          fare_price,
+          payment_status,
+          driver_id,
           user_id
       ) VALUES (
           ${origin_address},
@@ -60,7 +71,7 @@ export async function POST(request: Request) {
           ${destination_longitude},
           ${ride_time},
           ${fare_price},
-          ${payment_status},
+          ${normalizedStatus},
           ${driver_id},
           ${user_id}
       )
