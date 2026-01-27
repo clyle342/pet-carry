@@ -45,6 +45,11 @@ declare interface Ride {
   payment_status: string;
   driver_id: number;
   user_email: string;
+  pet_name?: string;
+  species?: string;
+  size?: string;
+  crate_required?: boolean;
+  special_notes?: string;
   created_at: string;
   driver: {
     first_name: string;
@@ -95,6 +100,18 @@ declare interface PaymentProps {
   amount: string;
   driverId: number;
   rideTime: number;
+  userId?: string;
+  originAddress?: string;
+  destinationAddress?: string;
+  originLatitude?: number;
+  originLongitude?: number;
+  destinationLatitude?: number;
+  destinationLongitude?: number;
+  petName?: string;
+  species?: string;
+  size?: string;
+  crateRequired?: boolean;
+  specialNotes?: string;
 }
 
 declare interface LocationStore {

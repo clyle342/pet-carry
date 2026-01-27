@@ -1,8 +1,18 @@
 import { useUser } from "@clerk/clerk-expo";
-import { Image, Text, View } from "react-native";
+import { useState } from "react";
+import {
+  Alert,
+  Image,
+  Switch,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import RideLayout from "@/components/RideLayout";
 import Payment from "@/components/Payment";
+import InputField from "@/components/InputField";
 import { icons } from "../constants";
 import { formatTime } from "@/lib/utils";
 import { useDriverStore, useLocationStore } from "@/store";
@@ -10,12 +20,34 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 
 const BookRide = () => {
   const { user } = useUser();
-  const { userAddress, destinationAddress } = useLocationStore();
+  const {
+    userAddress,
+    destinationAddress,
+    userLatitude,
+    userLongitude,
+    destinationLatitude,
+    destinationLongitude,
+  } = useLocationStore();
   const { drivers, selectedDriver } = useDriverStore();
+  const [petName, setPetName] = useState("");
+  const [species, setSpecies] = useState<"" | "dog" | "cat" | "other">("");
+  const [size, setSize] = useState<"" | "small" | "medium" | "large">("");
+  const [crateRequired, setCrateRequired] = useState(false);
+  const [specialNotes, setSpecialNotes] = useState("");
+  const [showValidationErrors, setShowValidationErrors] = useState(false);
 
   const driverDetails = drivers?.filter(
     (driver) => +driver.id === selectedDriver
   )[0];
+  const isPetDetailsValid = Boolean(petName.trim()) && Boolean(species);
+
+  const handlePetDetailsInvalid = () => {
+    setShowValidationErrors(true);
+    Alert.alert(
+      "Pet details required",
+      "Please provide your pet's name and species before booking."
+    );
+  };
 
   return (
     <StripeProvider
@@ -92,6 +124,108 @@ const BookRide = () => {
             </View>
           </View>
 
+          <View className="flex flex-col w-full items-start justify-center mt-6">
+            <Text className="text-xl font-JakartaSemiBold mb-3">
+              Pet Details
+            </Text>
+
+            <InputField
+              label="Pet Name"
+              placeholder="e.g., Bella"
+              value={petName}
+              onChangeText={setPetName}
+            />
+            {showValidationErrors && !petName.trim() && (
+              <Text className="text-sm text-red-500 -mt-1 mb-2">
+                Pet name is required.
+              </Text>
+            )}
+
+            <Text className="text-lg font-JakartaSemiBold mt-3 mb-2">
+              Species
+            </Text>
+            <View className="flex flex-row flex-wrap">
+              {["dog", "cat", "other"].map((option) => (
+                <View key={option} className="mr-2 mb-2">
+                  <TouchableOpacity
+                    onPress={() =>
+                      setSpecies(option as "dog" | "cat" | "other")
+                    }
+                    className={`px-4 py-2 rounded-full border ${
+                      species === option
+                        ? "bg-general-600 border-general-600"
+                        : "bg-white border-general-700"
+                    }`}
+                  >
+                    <Text
+                      className={`${
+                        species === option
+                          ? "font-JakartaSemiBold"
+                          : "font-JakartaRegular"
+                      }`}
+                    >
+                      {option.charAt(0).toUpperCase() + option.slice(1)}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
+            {showValidationErrors && !species && (
+              <Text className="text-sm text-red-500 mb-2">
+                Species is required.
+              </Text>
+            )}
+
+            <Text className="text-lg font-JakartaSemiBold mt-3 mb-2">
+              Size
+            </Text>
+            <View className="flex flex-row flex-wrap">
+              {["small", "medium", "large"].map((option) => (
+                <View key={option} className="mr-2 mb-2">
+                  <TouchableOpacity
+                    onPress={() =>
+                      setSize(option as "small" | "medium" | "large")
+                    }
+                    className={`px-4 py-2 rounded-full border ${
+                      size === option
+                        ? "bg-general-600 border-general-600"
+                        : "bg-white border-general-700"
+                    }`}
+                  >
+                    <Text
+                      className={`${
+                        size === option
+                          ? "font-JakartaSemiBold"
+                          : "font-JakartaRegular"
+                      }`}
+                    >
+                      {option.charAt(0).toUpperCase() + option.slice(1)}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
+
+            <View className="flex flex-row items-center justify-between w-full mt-3">
+              <Text className="text-lg font-JakartaSemiBold">
+                Crate Required
+              </Text>
+              <Switch value={crateRequired} onValueChange={setCrateRequired} />
+            </View>
+
+            <Text className="text-lg font-JakartaSemiBold mt-4 mb-2">
+              Special Notes
+            </Text>
+            <TextInput
+              className="w-full min-h-[90px] rounded-2xl p-4 font-JakartaSemiBold text-[15px] bg-neutral-100 border border-neutral-100"
+              placeholder="Add any special instructions"
+              multiline
+              textAlignVertical="top"
+              value={specialNotes}
+              onChangeText={setSpecialNotes}
+            />
+          </View>
+
           {/* Payment Component */}
           <Payment
             fullName={user?.fullName!}
@@ -99,6 +233,20 @@ const BookRide = () => {
             amount={driverDetails?.price!}
             driverId={driverDetails?.id}
             rideTime={driverDetails?.time!}
+            userId={user?.id}
+            originAddress={userAddress ?? ""}
+            destinationAddress={destinationAddress ?? ""}
+            originLatitude={userLatitude ?? undefined}
+            originLongitude={userLongitude ?? undefined}
+            destinationLatitude={destinationLatitude ?? undefined}
+            destinationLongitude={destinationLongitude ?? undefined}
+            petName={petName}
+            species={species}
+            size={size}
+            crateRequired={crateRequired}
+            specialNotes={specialNotes}
+            isPetDetailsValid={isPetDetailsValid}
+            onPetDetailsInvalid={handlePetDetailsInvalid}
           />
         </>
       </RideLayout>

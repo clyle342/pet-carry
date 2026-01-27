@@ -18,6 +18,11 @@ export async function GET(request: Request, {id}: { id: string }) {
             rides.ride_time,
             rides.fare_price,
             rides.payment_status,
+            rides.pet_name,
+            rides.species,
+            rides.size,
+            rides.crate_required,
+            rides.special_notes,
             rides.created_at,
             'driver', json_build_object(
                 'driver_id', drivers.id,

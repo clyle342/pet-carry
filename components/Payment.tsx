@@ -14,6 +14,20 @@ type PaymentProps = {
   amount?: number;
   driverId?: string;
   rideTime?: number;
+  userId?: string;
+  originAddress?: string;
+  destinationAddress?: string;
+  originLatitude?: number;
+  originLongitude?: number;
+  destinationLatitude?: number;
+  destinationLongitude?: number;
+  petName?: string;
+  species?: string;
+  size?: string;
+  crateRequired?: boolean;
+  specialNotes?: string;
+  isPetDetailsValid?: boolean;
+  onPetDetailsInvalid?: () => void;
 };
 
 const Payment = ({
@@ -22,6 +36,20 @@ const Payment = ({
   amount,
   driverId,
   rideTime,
+  userId,
+  originAddress,
+  destinationAddress,
+  originLatitude,
+  originLongitude,
+  destinationLatitude,
+  destinationLongitude,
+  petName,
+  species,
+  size,
+  crateRequired,
+  specialNotes,
+  isPetDetailsValid = true,
+  onPetDetailsInvalid,
 }: PaymentProps) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
@@ -74,10 +102,22 @@ const Payment = ({
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
+                    origin_address: originAddress,
+                    destination_address: destinationAddress,
+                    origin_latitude: originLatitude,
+                    origin_longitude: originLongitude,
+                    destination_latitude: destinationLatitude,
+                    destination_longitude: destinationLongitude,
                     ride_time: rideTime.toFixed(0),
                     fare_price: Math.round(safeAmount * 100),
                     payment_status: "paid",
                     driver_id: driverId,
+                    user_id: userId,
+                    pet_name: petName,
+                    species,
+                    size,
+                    crate_required: crateRequired,
+                    special_notes: specialNotes,
                   }),
                 });
               }
@@ -96,6 +136,29 @@ const Payment = ({
   };
 
   const openPaymentSheet = async () => {
+    if (!isPetDetailsValid) {
+      onPetDetailsInvalid?.();
+      return;
+    }
+
+    if (
+      driverId &&
+      rideTime &&
+      (!originAddress ||
+        !destinationAddress ||
+        typeof originLatitude !== "number" ||
+        typeof originLongitude !== "number" ||
+        typeof destinationLatitude !== "number" ||
+        typeof destinationLongitude !== "number" ||
+        !userId)
+    ) {
+      Alert.alert(
+        "Trip details missing",
+        "Please confirm your pickup and destination details before booking."
+      );
+      return;
+    }
+
     await initializePaymentSheet();
     const { error } = await presentPaymentSheet();
 

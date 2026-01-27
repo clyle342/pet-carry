@@ -15,6 +15,11 @@ export async function POST(request: Request) {
       payment_status,
       driver_id,
       user_id,
+      pet_name,
+      species,
+      size,
+      crate_required,
+      special_notes,
     } = body;
 
     if (
@@ -28,7 +33,9 @@ export async function POST(request: Request) {
       !fare_price ||
       !payment_status ||
       !driver_id ||
-      !user_id
+      !user_id ||
+      !pet_name ||
+      !species
     ) {
       return Response.json(
         { error: "Missing required fields" },
@@ -50,7 +57,12 @@ export async function POST(request: Request) {
           fare_price, 
           payment_status, 
           driver_id, 
-          user_id
+          user_id,
+          pet_name,
+          species,
+          size,
+          crate_required,
+          special_notes
       ) VALUES (
           ${origin_address},
           ${destination_address},
@@ -62,7 +74,12 @@ export async function POST(request: Request) {
           ${fare_price},
           ${payment_status},
           ${driver_id},
-          ${user_id}
+          ${user_id},
+          ${pet_name},
+          ${species},
+          ${size},
+          ${crate_required},
+          ${special_notes}
       )
       RETURNING *;
     `;
