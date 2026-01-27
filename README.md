@@ -8,7 +8,7 @@ Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstra
 
 ![React Native](https://img.shields.io/badge/-React_Native-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Expo](https://img.shields.io/badge/-Expo-000020?style=flat-square&logo=expo&logoColor=white)
-![Stripe](https://img.shields.io/badge/-Stripe-626CD9?style=flat-square&logo=stripe&logoColor=white)
+![M-Pesa](https://img.shields.io/badge/-M--Pesa-00A650?style=flat-square)
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
 ![Google Maps](https://img.shields.io/badge/-Google_Maps-4285F4?style=flat-square&logo=google-maps&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
@@ -33,7 +33,7 @@ Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstra
 - **React Native (Expo)** – Frontend mobile development
 - **TypeScript** – Typed JavaScript for better maintainability
 - **NeonDB (PostgreSQL)** – Edge-ready serverless relational database
-- **Stripe** – Payment integration
+- **M-Pesa Daraja** – Payment integration
 - **Tailwind CSS** – Utility-first styling
 - **Zustand** – Lightweight state management
 - **Google Maps API** – Location services and routing
@@ -52,7 +52,7 @@ Designed and taught by Adrian Hajdin of JavaScript Mastery, this build demonstra
 👉 **Find Trips by Location**  
 👉 **Select Trips from Nearby Cars on Map**  
 👉 **Confirm Trip with Time and Price Details**  
-👉 **Pay for Trip Using Stripe**  
+👉 **Pay for Trip Using M-Pesa (STK Push)**  
 👉 **Trip Created After Successful Payment**  
 👉 **User Profile Management**  
 👉 **View Trip History**
@@ -84,8 +84,12 @@ Create a .env file in the root of your project and add:
 - DATABASE_URL=
 - EXPO_PUBLIC_SERVER_URL=https://petcarry.dev/
 - EXPO_PUBLIC_GEOAPIFY_API_KEY=
-- EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-- STRIPE_SECRET_KEY=
+- MPESA_CONSUMER_KEY=
+- MPESA_CONSUMER_SECRET=
+- MPESA_SHORTCODE=
+- MPESA_PASSKEY=
+- MPESA_CALLBACK_URL=
+- MPESA_ENV=sandbox
 
 ### Start the App
 

@@ -92,9 +92,10 @@ declare interface InputFieldProps extends TextInputProps {
 declare interface PaymentProps {
   fullName: string;
   email: string;
-  amount: string;
+  amount: number;
   driverId: number;
   rideTime: number;
+  userId: string;
 }
 
 declare interface LocationStore {
