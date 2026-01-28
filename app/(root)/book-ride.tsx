@@ -6,7 +6,6 @@ import Payment from "@/components/Payment";
 import { icons } from "../constants";
 import { formatTime } from "@/lib/utils";
 import { useDriverStore, useLocationStore } from "@/store";
-import { StripeProvider } from "@stripe/stripe-react-native";
 
 const BookRide = () => {
   const { user } = useUser();
@@ -18,16 +17,11 @@ const BookRide = () => {
   )[0];
 
   return (
-    <StripeProvider
-      publishableKey={process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY!}
-      merchantIdentifier="merchant.com.petcarry"
-      urlScheme="myapp"
-    >
-      <RideLayout title="Book Trip">
-        <>
-          <Text className="text-xl font-JakartaSemiBold mb-3">
-            Trip Information
-          </Text>
+    <RideLayout title="Book Trip">
+      <>
+        <Text className="text-xl font-JakartaSemiBold mb-3">
+          Trip Information
+        </Text>
 
           <View className="flex flex-col w-full items-center justify-center mt-10">
             <Image
@@ -93,16 +87,16 @@ const BookRide = () => {
           </View>
 
           {/* Payment Component */}
-          <Payment
-            fullName={user?.fullName!}
-            email={user?.emailAddresses[0].emailAddress!}
-            amount={driverDetails?.price!}
-            driverId={driverDetails?.id}
-            rideTime={driverDetails?.time!}
-          />
-        </>
-      </RideLayout>
-    </StripeProvider>
+        <Payment
+          fullName={user?.fullName!}
+          email={user?.emailAddresses[0].emailAddress!}
+          amount={Number(driverDetails?.price)}
+          driverId={driverDetails?.id}
+          rideTime={driverDetails?.time!}
+          userId={user?.id}
+        />
+      </>
+    </RideLayout>
   );
 };
 
